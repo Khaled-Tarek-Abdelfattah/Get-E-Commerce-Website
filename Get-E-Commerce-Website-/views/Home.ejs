@@ -1,0 +1,54 @@
+<%- include("partials/header") %>
+<!--Shopping section-->
+<h1>Get All You Want With Best Prices And Service.</h1>
+<section class="testimonials content" id="testimonials">
+  <!-- bootstrap: using carsouel is to present many things in the same region and make it slide auto or manualy ny buttons -->
+  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-bs-pause="hover">
+    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="images/iphoneMobiles.png" class="d-block w-100 testimonial-image" alt="Iphones">
+        </div>
+        <div class="carousel-item">
+          <img src="images/android-mobiles.png" class="d-block w-100 testimonial-image" alt="Android">
+        </div>
+        <div class="carousel-item">
+          <img src="images/deliver.png" class="d-block w-100 testimonial-image" alt="Dilevary">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+</section>
+<section class="shopping-section content">
+  <div class="row main-content">
+    <%shoppingItems.forEach(function(item){%>
+    <div class="coll col-sm-9 col-md-5 col-lg-3 item">
+      <div class="card itemCard">
+        <img class="itemImage" src="data:item/<%=item.img.contentType%>;base64,
+                       <%=item.img.data.toString('base64')%>">
+        <div class="card-body">
+          <h5 class="card-title"><%=item.name%></h5>
+          <p class="card-text"><%=item.Description%></p>
+          <p class="card-price"><%=item.price%>$</p>
+          <br>
+          <form class="" action="/Home" method="post">
+            <input type="hidden" name="id" value="<%=item._id%>">
+            <button type="submit" class="btn btn-primary adding-to-cart" ><span>Add To Cart <i class="fa-solid fa-cart-plus"></i></span></button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <%})%>
+
+  </div>
+</section>
+
+<%- include("partials/footer") %>

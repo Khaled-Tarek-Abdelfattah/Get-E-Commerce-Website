@@ -1,0 +1,76 @@
+.form-content{
+  background-color: #E4E9FD;
+  background-image: -webkit-linear-gradient(65deg, black 50%, #E4E9FD 50%);
+}
+body{
+  text-align: center;
+}
+.brand{
+  font-style: italic;
+}
+.content{
+  margin: 40px 50px;
+  min-height: 250px;
+}
+
+.coll{
+  background-color: #D3D3D3;
+  text-align: center;
+  margin: 15px auto;
+  padding: 10px;
+}
+.card-img{
+  width: 100%;
+  height: 40%;
+}
+.testimonial-image{
+  width: 50%;
+  height: 45%;
+  background-color: black;
+}
+.inputs{
+  padding: 10px;
+  width: 500px;
+}
+.desc-input{
+  padding: 10px;
+  width: 500px;
+  margin : 10px auto;
+}
+.item{
+  height: 450px;
+  background: black;
+  margin:0 4.15% 1% 4.15%;
+}
+.itemImage{
+  margin: 0 auto;
+  width: 70%;
+  height: 60%;
+}
+.itemCard{
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+.card-price{
+  color: blue;
+  font-weight: bold;
+  position: absolute;
+  right: 10px;
+}
+
+.testimonial-image{
+  height: 300px;
+}
+.sponser-text{
+  font-size: 28px;
+}
+.payment-details{
+  text-align: right;
+}
+.delete:hover{
+  color: red;
+}
+.count{
+  color: blue;
+}
