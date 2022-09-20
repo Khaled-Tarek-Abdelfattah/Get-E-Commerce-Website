@@ -105,7 +105,6 @@ app.get("/Home",function(req,res){
   if(req.isAuthenticated()){
     product.find({}, (err, items) => {
           if (err) {
-            console.log(err);
             res.status(500).send('An error occurred', err);
           }
           else {
@@ -132,11 +131,9 @@ app.get("/contact",function(req,res){
   res.render("contact");
 })
 app.get("/Compose",function(req,res){
-  console.log(authUser);
   if(req.isAuthenticated() && authUser == "Admin@get.info"){
     product.find({}, (err, items) => {
       if (err) {
-          console.log(err);
           res.status(500).send('An error occurred', err);
       }
       else {
@@ -151,7 +148,6 @@ app.get("/Compose",function(req,res){
 app.get("/Payment",function(req,res){
   User.findOne({username : authUser}, function(err, foundUser){
     if(err){
-      console.log("Error");
     }else{
       res.render("Payment",{products:foundUser.products});
     }
@@ -159,18 +155,14 @@ app.get("/Payment",function(req,res){
 })
 
 app.post("/Home", function(req,res){
-  console.log(req.body.id);
   User.findOne({username: authUser}, function(err,foundOne){
     if(err){
-      console.log("user not found");
     }else{
       product.findById(req.body.id, function(err,foundItem){
         if(err){
-          console.log("Product not found");
         }else{
           foundOne.products.push(foundItem);
           foundOne.save();
-          console.log("product Added");
         }
       })
     }
@@ -180,11 +172,8 @@ app.post("/Home", function(req,res){
 
 app.post("/register",function(req,res){
   authUser = req.body.username;
-  console.log(authUser);
   User.register({username:req.body.username, userUniqeName:req.body.uniqueName}, req.body.password, function(err, user) {
     if (err){
-      console.log(err);
-      console.log("error on registering");
       res.redirect("/register");
     }else{
       passport.authenticate("local")(req, res, function() {
@@ -196,7 +185,6 @@ app.post("/register",function(req,res){
 
 app.post("/login",function(req,res){
   authUser = req.body.username;
-  console.log(authUser);
   const user = new User({
     username:req.body.username,
     password:req.body.password,
@@ -204,7 +192,6 @@ app.post("/login",function(req,res){
 
   req.login(user, function(err){
     if(err){
-      console.log(err);
     }else{
       passport.authenticate("local")(req, res, function(){
         res.redirect("/Home");
@@ -236,10 +223,12 @@ app.post("/compose",upload.single('image'),function(req,res){
 
 app.post("/delete", function(req,res){
   const idDelete = req.body.deletedId;
-  User.findOne({username: authUser}, function(err,foundOne){
-
+  User.findOneAndUpdate({username:authUser},{$pull:{products:{_id : idDelete}}},function(err,foundList){
+    if(!err){
+      res.redirect("/payment")
+    }
   })
-  res.redirect("/payment");
+
 })
 
 app.listen(3000,function(){
